@@ -4,6 +4,7 @@ from config import mysql
 from flask import jsonify
 from flask import request
 from datetime import datetime
+from helper import sort_by_date
 
 @app.route('/task', methods=['POST', 'GET'])
 def task():
@@ -15,7 +16,7 @@ def task():
             # _timestamp = _json['timestamp']
             time_string = _json['timestamp']
             print(time_string)
-            datetime_obj = datetime.strptime(time_string, '%Y-%m-%dT%H:%M:%S%z')
+            datetime_obj = datetime.strptime(time_string, '%Y-%m-%dT%H:%M:%S')
             _timestamp = datetime_obj.strftime('%Y-%m-%d %H:%M:%S')
 
             if _title and _description and _timestamp and request.method == 'POST':
@@ -40,9 +41,11 @@ def task():
             connection = mysql.connect()
             cursor = connection.cursor(pymysql.cursors.DictCursor)
             cursor.execute("SELECT id, title, description, timestamp FROM task")
-            taskRows = cursor.fetchall()
+            task_rows = cursor.fetchall()
             connection.commit()
-            response = jsonify(taskRows)
+            # response = jsonify(task_rows)
+            raw_tasks = jsonify(task_rows).json
+            response = jsonify(sort_by_date(raw_tasks))
             response.status_code = 200
             return response
         except Exception as err:
@@ -144,6 +147,7 @@ def showErrMessage():
     response = jsonify(message)
     response.status_code = 404
     return response
+
 
 
 
