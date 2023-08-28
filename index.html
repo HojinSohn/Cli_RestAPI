@@ -19,12 +19,16 @@
 <body>
     <h1 class="month-year" id="currentDate"></h1>
     <div class="main">
-        <div class="leftPart">
+        <div class="tasks">
             <h1>UPCOMING TASKS</h1>
             <div id="list"></div>
         </div>
-        <div class="rightPart">
-            <h1>MENAGE TASKS</h1>
+        <div class="input-box">
+            <h1>MANAGE TASK</h1>
+            <input type="text" id="titleInput" placeholder="Title">
+            <textarea id="descriptionInput" placeholder="Description"></textarea>
+            <input type="text" id="timeInput" placeholder="Time">
+            <button id="submitButton">Submit</button>
         </div>
     </div>
     <script src="script.js"></script>

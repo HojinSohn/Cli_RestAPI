@@ -8,6 +8,7 @@ button {
     width: 80%;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
     background-color: #f5f5f5;
     padding: 10px;
@@ -16,13 +17,13 @@ button {
 }
 
 button:hover {
-    background-color: #888; /* Darker blue background on hover */
+    background-color: #ccc;
 }
 
 button span {
-    font-weight: Bold; /* Make the text bold */
+    font-weight: Bold;
     color: #555555;
-    background: cornsilk;
+    background: yellow;
     margin: auto;
     padding: 10px;
     width: 30%;
@@ -47,7 +48,7 @@ nav ul {
 }
 
 nav li {
-    margin-right: 20px; /* Add spacing between list items */
+    margin-right: 20px;
 }
 
 nav a {
@@ -58,12 +59,11 @@ nav a {
 .main {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
-.rightPart,
-.leftPart {
-    flex: 1;
+.tasks {
+    flex: 0.7;
     padding: 20px;
     border: 1px solid #aaa;
     box-sizing: border-box;
@@ -72,12 +72,8 @@ nav a {
     background: #eee;
 }
 
-.leftPart {
+.tasks {
     margin-left: 10px;
-}
-
-.rightPart {
-    margin-right: 10px;
 }
 
 .taskDisplay {
@@ -89,5 +85,62 @@ nav a {
 .timestamp {
     font-size: 14px;
     color: #444;
-    margin-right: auto; /* Push timestamp to the left edge */
+    margin-right: auto;
+}
+
+
+
+.taskCard {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+    background: yellow;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.taskCard-title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.taskCard-description {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.taskCard-time {
+    font-size: 14px;
+    color: #666;
+}
+
+.manageButtonContainer {
+    align-content: space-between;
+    justify-content: center;
+}
+
+.taskHandleButton {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.input-box {
+    position: fixed;
+    right: 30px;
+    transform: translateY(40%);
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+}
+
+input,
+textarea {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }

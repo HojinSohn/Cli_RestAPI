@@ -23,30 +23,40 @@ const getTaskList = async () => {
 
         const daysDiff = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
         // const hoursDiff = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-
-        return`<div class="taskDisplay" id="${taskJson.title}u" style="display: none">
+        return`
+            <div class="taskDisplay" id="${taskJson.title}u" style="display: none">
                 <button class="taskButton" data-task='${JSON.stringify(taskJson)}'>
-                    <p>${taskJson.description}</p>
-                </button> ${
-            daysDiff > 0 ?
-                `<p>${daysDiff} day left</p>`
-                // : hoursDiff < 0 
-                //     ? `<p>${hoursDiff} hours left</p>`
-                : `<p>overdue</p>`
-        }
+                    <div class="taskCard">
+                      <div class="taskCard-title">${taskJson.title}</div>
+                      <div class="taskCard-description">${taskJson.description}</div>
+                      <div class="taskCard-time">${taskJson.timestamp}</div>
+                    </div>
+                    ${
+                        daysDiff > 0 ?
+                            `<p>${daysDiff} day left</p>`
+                            // : hoursDiff < 0 
+                            //     ? `<p>${hoursDiff} hours left</p>`
+                            : `<p>overdue</p>`
+                    }
+                </button>
+                <div class="manageButtonContainer">
+                    <button class="taskHandleButton" id="update" onclick="updateTask(${taskJson.id})">UPDATE</button>
+                    <button class="taskHandleButton" id="delete" onclick="deleteTask(${taskJson.id})">Delete</button>
+                </div>
             </div> 
+            
             <div class="taskDisplay" id="${taskJson.title}o">
                     <button class="taskButton" data-task='${JSON.stringify(taskJson)}'>
                         <p class="timestamp">${taskJson.timestamp}</p>
                         <span>${taskJson.title}</span>
                     </button> ${
-            daysDiff > 0 ?
-                `<p>${daysDiff} day left</p>`
-                // : hoursDiff < 0 
-                //     ? `<p>${hoursDiff} hours left</p>`
-                : `<p>overdue</p>`
-        }
-                </div>`;
+                        daysDiff > 0 ?
+                            `<p>${daysDiff} day left</p>`
+                            // : hoursDiff < 0 
+                            //     ? `<p>${hoursDiff} hours left</p>`
+                            : `<p>overdue</p>`
+                    }
+            </div>`;
     });
 
 
@@ -63,6 +73,8 @@ const getTaskList = async () => {
     });
 }
 
+
+
 function toggleContent(title) {
     const originalContent = document.getElementById(`${title}o`);
     const updatedContent = document.getElementById(`${title}u`);
@@ -77,6 +89,24 @@ function toggleContent(title) {
         updatedContent.style.display = "flex";
         taskStates[title] = "updated";
     }
+}
+
+function updateTask(taskID) {
+    const titleInput = document.getElementById("titleInput");
+    const descriptionInput = document.getElementById("descriptionInput");
+    const timeInput = document.getElementById("timeInput");
+    titleInput.value = taskID
+    descriptionInput.value = taskJson.description
+    timeInput.value = taskJson.timestamp
+}
+
+function deleteTask(taskID) {
+    const titleInput = document.getElementById("titleInput");
+    const descriptionInput = document.getElementById("descriptionInput");
+    const timeInput = document.getElementById("timeInput");
+    titleInput.value = taskID
+    descriptionInput.value = taskJson.description
+    timeInput.value = taskJson.timestamp
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
