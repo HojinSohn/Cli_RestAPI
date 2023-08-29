@@ -14,6 +14,7 @@ button {
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /*margin: 10px;*/
 }
 
 button:hover {
@@ -35,7 +36,7 @@ button span {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 40px;
     background-color: #555;
     color: white;
 }
@@ -60,21 +61,20 @@ nav a {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
+    margin-left: 20px;
 }
 
 .tasks {
     flex: 0.7;
     padding: 20px;
-    border: 1px solid #aaa;
+    /*border: 1px solid #aaa;*/
     box-sizing: border-box;
-    text-align: center;
+    text-align: left;
     margin-top: 20px;
-    background: #eee;
+    /*background: #eee;*/
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 1);*/
 }
 
-.tasks {
-    margin-left: 10px;
-}
 
 .taskDisplay {
     display: flex;
@@ -107,7 +107,9 @@ nav a {
 
 .taskCard-description {
     font-size: 15px;
+    overflow: hidden;
     margin-bottom: 10px;
+    white-space: pre-wrap;
 }
 
 .taskCard-time {
@@ -115,20 +117,10 @@ nav a {
     color: #666;
 }
 
-.manageButtonContainer {
-    align-content: space-between;
-    justify-content: center;
-}
-
-.taskHandleButton {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
 .input-box {
     position: fixed;
     right: 30px;
-    transform: translateY(40%);
+    transform: translateY(-15%);
     width: 300px;
     padding: 20px;
     border: 1px solid #ccc;
@@ -143,4 +135,60 @@ textarea {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
+}
+
+.month-year {
+    margin: 30px;
+}
+
+.submitButton {
+    margin-top: 10%;
+}
+
+.addTaskButton {
+    background-color: #888;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;  /* Smaller font size */
+    width: 10%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.addTaskButton:hover {
+    background-color: #aaa;
+}
+
+.addTaskContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.manageButtonContainer {
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.taskHandleButton {
+    padding: 8px 16px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#update {
+    background-color: blue;
+    color: white;
+}
+
+#delete {
+    background-color: red;
+    color: white;
+}
+
+.taskHandleButton:hover {
+    filter: brightness(1.2); /* Brighten the button on hover */
 }

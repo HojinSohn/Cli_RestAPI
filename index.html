@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <header>
     <div class="heading">
@@ -20,19 +22,26 @@
     <h1 class="month-year" id="currentDate"></h1>
     <div class="main">
         <div class="tasks">
-            <h1>UPCOMING TASKS</h1>
+            <div class="addTaskContainer">
+                <h1>UPCOMING TASKS</h1>
+                <button class="addTaskButton">
+                    + ADD NEW TASK
+                </button>
+            </div>
             <div id="list"></div>
         </div>
         <div class="input-box">
             <h1>MANAGE TASK</h1>
             <input type="text" id="titleInput" placeholder="Title">
             <textarea id="descriptionInput" placeholder="Description"></textarea>
-            <input type="text" id="timeInput" placeholder="Time">
-            <button id="submitButton">Submit</button>
+            <input type="text" id="datetimeDisplay">
+            <button class="submitButton" onclick=createTaskAPI()>ADD NEW TASK</button>
         </div>
     </div>
-    <script src="script.js"></script>
 </body>
+<script src="script.js"></script>
+<script src="timeSelector.js"></script>
+<script src="createTaskButton.js"></script>
 <footer>
     <p>&copy; Hojin Sohn. This is only for me to manage tasks.</p>
 </footer>

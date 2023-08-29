@@ -29,7 +29,7 @@ const getTaskList = async () => {
                     <div class="taskCard">
                       <div class="taskCard-title">${taskJson.title}</div>
                       <div class="taskCard-description">${taskJson.description}</div>
-                      <div class="taskCard-time">${taskJson.timestamp}</div>
+                      <div class="taskCard-time">${new Date(taskJson.timestamp)}</div>
                     </div>
                     ${
                         daysDiff > 0 ?
@@ -47,7 +47,7 @@ const getTaskList = async () => {
             
             <div class="taskDisplay" id="${taskJson.title}o">
                     <button class="taskButton" data-task='${JSON.stringify(taskJson)}'>
-                        <p class="timestamp">${taskJson.timestamp}</p>
+                        <p class="timestamp">${new Date(taskJson.timestamp)}</p>
                         <span>${taskJson.title}</span>
                     </button> ${
                         daysDiff > 0 ?
@@ -91,22 +91,63 @@ function toggleContent(title) {
     }
 }
 
-function updateTask(taskID) {
+async function updateTask(taskID) {
+    document.querySelector(".submitButton").innerText = "UPDATE TASK"
+    const response = await fetch(`http://127.0.0.1:5000/task/${taskID}`);
+    const taskJson = await response.json();
     const titleInput = document.getElementById("titleInput");
     const descriptionInput = document.getElementById("descriptionInput");
-    const timeInput = document.getElementById("timeInput");
-    titleInput.value = taskID
+    titleInput.disabled = false;
+    descriptionInput.disabled = false;
+    titleInput.value = taskJson.title
     descriptionInput.value = taskJson.description
-    timeInput.value = taskJson.timestamp
+    setDateTime((new Date(taskJson.timestamp)).toISOString());
+    const updateTaskAPI = async () => {
+        const response =  await fetch(`http://127.0.0.1:5000/task/${taskID}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "title": titleInput.value,
+                "description": descriptionInput.value,
+                "timestamp": timeInput.value+":00",
+            })
+        });
+        titleInput.value = ""
+        descriptionInput.value = ""
+        timeInput.value = ""
+        location.reload();
+    }
+    document.querySelector(".submitButton").onclick = () => {
+        updateTaskAPI()
+    }
 }
 
-function deleteTask(taskID) {
+async function deleteTask(taskID) {
+    document.querySelector(".submitButton").innerText = "DELETE TASK"
+    const response = await fetch(`http://127.0.0.1:5000/task/${taskID}`);
+    const taskJson = await response.json();
     const titleInput = document.getElementById("titleInput");
     const descriptionInput = document.getElementById("descriptionInput");
-    const timeInput = document.getElementById("timeInput");
-    titleInput.value = taskID
+    titleInput.disabled = true;
+    descriptionInput.disabled = true;
+    titleInput.value = taskJson.title
     descriptionInput.value = taskJson.description
-    timeInput.value = taskJson.timestamp
+    setDateTime((new Date(taskJson.timestamp)).toISOString());
+
+    const deleteTask = async () => {
+        const response =  await fetch(`http://127.0.0.1:5000/task/${taskID}`, {
+            method: "DELETE",
+        });
+        titleInput.value = ""
+        descriptionInput.value = ""
+        location.reload();
+    }
+
+    document.querySelector(".submitButton").onclick = () => {
+        deleteTask();
+    }
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
